@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    backgroundColor: 'black',
     paddingTop: 100,
     padding: 25,
   },
@@ -55,8 +56,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 20,
     borderRadius: 15,
-    backgroundColor: 'white', // White background for readability
-    color: 'black',
+    borderWidth: 1,
+    borderColor: Colors.WHITE,
+    backgroundColor: 'transparent', // Transpare background for readability
+    color: 'white',
   },
   button: {
     backgroundColor: 'black', // Black button background
