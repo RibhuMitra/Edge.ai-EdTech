@@ -1,4 +1,4 @@
-# IEMEdge.ai - Where Learning Meets Recognition 👋
+# Edge.ai - Where Learning Meets Recognition 👋
 
 ## Get started
 
