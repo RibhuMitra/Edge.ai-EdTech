@@ -46,14 +46,6 @@ npx expo start  # or expo start
 4. Enable **Storage** for profile pictures & certificates  
 5. Add your Firebase config in `firebaseConfig.jsx`  
 
-## Contributing 🤝
-
-1. Fork the repo  
-2. Create a feature branch (`git checkout -b feature-name`)  
-3. Commit your changes (`git commit -m "Added new feature"`)  
-4. Push to the branch (`git push origin feature-name`)  
-5. Open a Pull Request 🚀  
-
 ## Badges  
 ![Expo](https://img.shields.io/badge/Expo-ReactNative-blue?style=for-the-badge&logo=expo)  
 ![Firebase](https://img.shields.io/badge/Firebase-Backend-orange?style=for-the-badge&logo=firebase)  
