@@ -5,8 +5,8 @@ Edge.ai is a React Native application that curates AI-generated courses for stud
 ## Features ✨
 
 ✔️ AI-generated Fundamental & Advanced courses  
-✔️ Automated AI-based assessments  
-✔️ Progress tracking with flashcards 📊  
+✔️ Automated AI-based assessments, quizes, flashcards, QnA  
+✔️ Progress tracking 📊  
 ✔️ Certificate generation & email delivery 📝  
 ✔️ Firebase Authentication 🔐  
 ✔️ Payment gateway integration for premium access 💳    
