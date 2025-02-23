@@ -58,6 +58,5 @@ npx expo start  # or expo start
 ## Badges  
 ![Expo](https://img.shields.io/badge/Expo-ReactNative-blue?style=for-the-badge&logo=expo)  
 ![Firebase](https://img.shields.io/badge/Firebase-Backend-orange?style=for-the-badge&logo=firebase)  
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)  
 
 
