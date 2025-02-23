@@ -16,7 +16,18 @@ Edge.ai is a React Native application that curates AI-generated courses for stud
 - **Frontend:** React Native (Expo)  
 - **Backend:** Firebase (Auth, Firestore, Storage, Cloud Functions)  
 - **AI Model:** Google Gemini API  
-- **Payment Gateway:** Stripe  
+- **Payment Gateway:** Stripe
+
+  
+---
+
+### **7️⃣ Screenshots 📸**
+```md
+## Screenshots 📷
+| Home Screen | Course Page | Dark Mode |
+|------------|------------|------------|
+| ![Home](assets/screenshots/home.png) | ![Course](assets/screenshots/course.png) | ![Dark Mode](assets/screenshots/dark.png) |
+```
 
 ## Installation 🚀
 
