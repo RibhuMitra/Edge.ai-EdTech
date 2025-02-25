@@ -1,5 +1,7 @@
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
+import {UserDetailContext} from './../context/UserDetailContext'
+import { useState } from "react";
 
 export default function RootLayout() {
 
@@ -13,9 +15,16 @@ export default function RootLayout() {
   })
 
 
-  return <Stack screenOptions={{
+
+
+
+  return( 
+    
+   <Stack screenOptions={{
     headerShown : false
   }}>
     
   </Stack>
+  
+  )
 }

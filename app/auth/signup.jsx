@@ -1,16 +1,18 @@
 import { View, Text, TextInput, StyleSheet, Pressable, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../config/firebaseConfig';
 import { setDoc, doc } from "firebase/firestore";
+import { UserDetailContext } from './../../context/UserDetailContext';
 
 export default function Signup() {
   const router = useRouter();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {userDetail, setUserDetail}=useContext
 
   const CreateNewAccount = async () => {
     try {
