@@ -2,7 +2,7 @@
 
 Edge.ai is a React Native application that curates AI-generated courses for students, tracks their progress, and provides certification upon course completion. Built using **Expo** and **Firebase**, the app integrates **Google Gemini API** to generate personalized learning content.
 
-![Edge.ai Banner](https://raw.githubusercontent.com/your-username/EdgeAI/main/assets/banner.png) 
+![Edge.ai Banner]([https://raw.githubusercontent.com/your-username/EdgeAI/main/assets/banner.png](https://github.com/RibhuMitra/Edge.ai-EdTech/blob/master/assets/images/Slide%2016_9%20-%201.png)) 
 
 ## Features ✨
 
