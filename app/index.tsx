@@ -2,9 +2,22 @@ import { Image, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from './../constant/Colors';
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth, db } from './../config/firebaseConfig';
+import { getDoc, doc } from "firebase/firestore";
+
+
+
 
 export default function Index() {
   const router = useRouter();
+
+  onAuthStateChanged(auth, async(user) => {
+    if (user && user.email) {
+      console.log(user);
+      const result = await getDoc(doc(db, 'users', user?.email))
+    }
+  })
 
   return (
     <View style={styles.container}>
@@ -32,7 +45,7 @@ export default function Index() {
           Official Ed-Tech Partner Of many Global Universities and Institutions.
         </Text>
 
-        <Text style={[styles.footerText, { marginTop: 80 }]}>© All Rights Reserved</Text>
+        <Text style={[styles.footerText, { marginTop: 80 }]}>© 2025 All Rights Reserved</Text>
       </LinearGradient>
     </View>
   );
@@ -100,4 +113,5 @@ const styles = StyleSheet.create({
     fontFamily: 'outfit',
     marginTop: 80,
   },
+  
 });

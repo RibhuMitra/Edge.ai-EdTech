@@ -1,13 +1,49 @@
-import { View, Text, TextInput, StyleSheet, Pressable, TouchableOpacity } from 'react-native';
-import React from 'react';
+import { View, Text, TextInput, StyleSheet, Pressable, TouchableOpacity, ImageBackground, ScrollView, ToastAndroid } from 'react-native';
+import bgblur from './../../assets/images/bgblur2.png';
+import React, { useContext, useState } from 'react';
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from './../../config/firebaseConfig'
+import { getDoc } from 'firebase/firestore';
+import { doc } from "firebase/firestore";
+import { UserDetailContext } from '../../context/UserDetailContext';
+import { ActivityIndicator } from 'react-native';
+
 
 export default function Signin() {
   const router = useRouter();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const { userDetail, setUserDetail } = useContext(UserDetailContext);
+  const [loading, setLoading] = useState(false);
+
+  const onSignInClick = () => {
+    setLoading(true)
+    signInWithEmailAndPassword(auth, email, password)
+    .then(async(resp) => {
+      const user = resp.user
+      console.log(user)
+      await getUserDetail();
+      setLoading(false);
+      router.replace('/(tabs)/home')
+    }).catch(e => {
+      console.log(e)
+      setLoading(false);
+      ToastAndroid.show('Incorrect Email & Password', ToastAndroid.BOTTOM)
+    })
+
+  }
+
+  const getUserDetail = async() => {
+    const result =await getDoc(doc(db, 'users', email));
+    console.log(result.data())
+    setUserDetail(result.data())
+  }
 
   return (
-    <LinearGradient colors={['#FFFFFF', '#000000']} style={styles.container}>
+    <ImageBackground source={bgblur} style={styles.backgroundImage}>
+          <ScrollView contentContainerStyle={styles.container}>
       
       <View style={styles.header}>
         <Text style={styles.title}>Welcome Back</Text>
@@ -15,14 +51,14 @@ export default function Signin() {
       </View>
 
       <View style={styles.inputContainer}>
-        <TextInput placeholder="Email" style={styles.textInput} placeholderTextColor='white' autoCapitalize="none" keyboardType="email-address" />
-        <TextInput placeholder="Password" secureTextEntry={true} placeholderTextColor='white' style={styles.textInput} autoCapitalize="none" />
+        <TextInput placeholder="Email" onChangeText={(value)=>setEmail(value)} style={styles.textInput} placeholderTextColor='grey' autoCapitalize="none" keyboardType="email-address" />
+        <TextInput placeholder="Password" onChangeText={(value)=>setPassword(value)} secureTextEntry={true} placeholderTextColor='grey' style={styles.textInput} autoCapitalize="none" />
       </View>
 
-      {/* Improved Button */}
-      <TouchableOpacity style={styles.button}>
+      
+      <TouchableOpacity onPress={onSignInClick} style={styles.button}>
         <LinearGradient colors={['#333333', '#000000']} style={styles.buttonGradient}>
-          <Text style={styles.buttonText}>Log In</Text>
+        {loading ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.buttonText}>Log In</Text>}
         </LinearGradient>
       </TouchableOpacity>
 
@@ -32,13 +68,20 @@ export default function Signin() {
           <Text style={styles.signupLink}>Sign Up</Text>
         </Pressable>
       </View>
-    </LinearGradient>
+    </ScrollView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  backgroundImage: {
     flex: 1,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  container: {
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 30,
@@ -50,13 +93,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 60,
     fontFamily: 'nico',
-    color: '#fff',
+    color: 'black',
     textAlign: 'left',
   },
   subtitle: {
     fontSize: 18,
     fontFamily: 'outfit',
-    color: '#fff',
+    color: 'black',
     textAlign: 'left',
     marginTop: 5,
   },
@@ -68,13 +111,13 @@ const styles = StyleSheet.create({
     padding: 15,
     fontSize: 16,
     marginVertical: 10,
-    borderRadius: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    color: 'white',
+    borderRadius: 15,
+    backgroundColor: 'rgba(150, 146, 146, 0.1)',
+    color: 'black',
   },
   button: {
     width: '100%',
-    borderRadius: 10,
+    borderRadius: 25,
     overflow: 'hidden',
     marginTop: 20,
   },
@@ -85,18 +128,17 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     color: 'white',
-    fontWeight: 'bold',
   },
   signupContainer: {
     flexDirection: 'row',
     marginTop: 20,
   },
   signupText: {
-    color: '#ccc',
+    color: 'grey',
     fontSize: 14,
   },
   signupLink: {
-    color: '#fff',
+    color: 'black',
     fontSize: 14,
     fontWeight: 'bold',
     marginLeft: 5,
