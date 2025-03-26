@@ -32,12 +32,12 @@ cd EdgeAI
 
 ### 2. Install Dependencies  
 ```sh
-npm install  # or yarn install
+npm install  
 ```
 
 ### 3. Start the Development Server  
 ```sh
-npx expo start  # or expo start
+npx expo start  
 ```
 
 ## Firebase Setup 🔥
