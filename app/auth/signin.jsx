@@ -56,7 +56,7 @@ export default function Signin() {
       </View>
 
       
-      <TouchableOpacity onPress={onSignInClick} style={styles.button}>
+      <TouchableOpacity onPress={onSignInClick} disabled={loading} style={styles.button}>
         <LinearGradient colors={['#333333', '#000000']} style={styles.buttonGradient}>
         {loading ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.buttonText}>Log In</Text>}
         </LinearGradient>
@@ -145,3 +145,7 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
 });
+
+
+
+

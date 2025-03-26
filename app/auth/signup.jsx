@@ -7,23 +7,28 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../config/firebaseConfig';
 import { setDoc, doc } from "firebase/firestore";
 import { UserDetailContext } from './../../context/UserDetailContext';
+import { ActivityIndicator } from 'react-native';
 
 export default function Signup() {
   const router = useRouter();
   const [fullName, setFullName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [loading, setLoading] = useState(false);
   const { setUserDetail } = useContext(UserDetailContext);
 
   const CreateNewAccount = () => {
+    setLoading(true)
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (resp) => {
         const user = resp.user;
         console.log(user);
         await SaveUser(user);
+        setLoading(false);
       })
       .catch(e => {
         console.log(e.message);
+        setLoading(false);
       });
   };
 
@@ -75,7 +80,7 @@ export default function Signup() {
 
         <TouchableOpacity onPress={CreateNewAccount} style={styles.button}>
           <LinearGradient colors={['#333333', '#000000']} style={styles.buttonGradient}>
-            <Text style={styles.buttonText}>Create Account</Text>
+            {loading ? <ActivityIndicator size="small" color="white" /> : <Text style={styles.buttonText}>Create Account</Text>}
           </LinearGradient>
         </TouchableOpacity>
 
