@@ -40,7 +40,7 @@ export default function Button({ text, type = "fill", onPress, loading }) {
           </Text>
         ) : (
           // Loader with fixed color
-          <ActivityIndicator size="small" color="white" />
+          <ActivityIndicator size="small" color={type === 'fill' ? 'white' : 'rgba(1, 109, 82, 0.96)'} />
         )}
       </LinearGradient>
     </TouchableOpacity>
