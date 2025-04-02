@@ -1,16 +1,24 @@
 import { View, Text, StyleSheet, TouchableOpacity, Pressable, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import React, { useContext,useState } from 'react';
 import Colors from './../../constant/Colors';
 import { TextInput } from 'react-native';
 import Button from '../../components/Shared/Button';
 import { GenerateTopicAIModel } from '../../config/AiModel';
 import Prompt from '../../constant/Prompt';
+import { setDoc, doc } from "firebase/firestore";
+import { db } from '../../config/firebaseConfig';
+import {UserDetailContext} from '../../context/UserDetailContext';
+import { useRouter } from 'expo-router';
 
 export default function AddCourse() {
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
   const [userInput, setUserInput] = useState();
   const [topics, setTopics] = useState([]);
   const [selectedTopic, setSelectedTopics] = useState([]);
+  const { userDetail, setUserDetail } = useContext(UserDetailContext);
+  const router = useRouter();
+
 
   const onGenerateTopic = async () => {
     setLoading(true);
@@ -37,8 +45,32 @@ export default function AddCourse() {
   };
 
   // Used to Generate Course Using AI Model
-  const onGenerateCourse= () => {
-    const PROMPT = selectedTopics + Prompt.COURSE;
+  const onGenerateCourse= async() => {
+    setLoading2(true);
+    const PROMPT = selectedTopic + Prompt.COURSE;
+    try {
+      const aiResp = await GenerateTopicAIModel.sendMessage(PROMPT);
+      const resp = JSON.parse(aiResp.response.text());
+      const courses = resp.courses;
+      console.log(courses);
+    
+      courses?.forEach(async(course) => {
+        await setDoc(doc(db,'Courses', Date.now().toString() ),{
+          ...course,
+          createdOn: new Date(),
+          createdBy: userDetail?.email
+        })
+      })
+      router.push('/(tabs)/home')
+
+      setLoading2(false);
+    
+    }
+    catch (e) {
+      setLoading2(false);
+    }
+
+    
 
   }
 
@@ -92,7 +124,7 @@ export default function AddCourse() {
       </View>
 
       {setSelectedTopics?.length > 0 && <TouchableOpacity style={styles.Btn}>
-        <Button text={'Generate Course'} type="fill" onPress={() => onGenerateCourse()} loading={loading} />
+        <Button text={'Generate Course'} type="fill" onPress={() => onGenerateCourse()} loading={loading2} />
       </TouchableOpacity>}
     </View>
   );
