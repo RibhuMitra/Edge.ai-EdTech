@@ -14,25 +14,7 @@ export default function Home() {
 
 
 
-  useEffect(() => {
-    userDetail && GetCourseList();
-  }, [userDetail])
-
-  const GetCourseList = async() => {
-    const q = query(collection(db, 'Courses'), where("CreatedBy", '==', userDetail?.email))
-    const querySnapshot = await getDocs(q);
-
-    querySnapshot.forEach((doc) => {
-      console.log(console.log('Home Screen Rendered');
-       console.log('User Detail:', userDetail);
-       console.log('Course List:', courseList); doc.data());
-    })
-
-
-
-  }
-
-
+  
 
 
 
