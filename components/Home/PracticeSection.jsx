@@ -24,32 +24,50 @@ export const PraticeOption = [
 
 export default function PracticeSection() {
   return (
-    <View style={{ padding: 10 }}>
+    <View style= {{
+      marginTop : 5
+    }}>
       <Text style={{
         fontFamily: 'outfit-bold',
         fontSize: 20,
-        marginBottom: 10
-      }}>Practice Section</Text>
-
+      }}>Practice</Text>
+      
+      <View>
       <FlatList 
         data={PraticeOption}
-        keyExtractor={(item, index) => index.toString()}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <View style={{ marginRight: 15 }}>
-            <Image 
-              source={item.image} 
+        numColumns={3}
+        renderItem={({ item, index}) => (
+          <View key = { index }
+          style={{
+            flex : 1,
+            margin : 5,
+            aspectRatio : 1,
+
+           }}
+          
+          >
+            <Image source={item?.image} 
               style={{
-                width: 200,
-                height: 160,
-                borderRadius: 15,
-                resizeMode: 'cover'
-              }} 
-            />
+                width: '100%',
+                height:'100%',
+                maxHeigt: 160,
+                borderRadius : 15,
+                
+
+              }} />
+              
+              <Text style = {{
+                position : 'absolute',
+                padding : 10,
+                fontFamily : 'outfit',
+                fontSize : 15,
+                color: 'white'
+              }
+              }>{ item.name }</Text>
           </View>
         )}
-      />
+      /> 
+      </View>
     </View>
   );
 }

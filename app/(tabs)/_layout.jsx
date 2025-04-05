@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     borderRadius: 50,
     marginHorizontal: 20,
-    marginBottom: 25,
+    marginBottom: 20,
     height: 52,
     position: 'absolute',
     overflow: 'hidden',

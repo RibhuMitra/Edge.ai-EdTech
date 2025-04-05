@@ -1,4 +1,4 @@
-import { View, Text, Platform } from 'react-native'
+import { View, Text, Platform, FlatList } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import Header from '../../components/Home/Header'
 import NoCourse from '../../components/Home/NoCourse'
@@ -7,6 +7,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from './../../config/firebaseConfig';
 import { UserDetailContext } from '../../context/UserDetailContext';
 import PracticeSection from '../../components/Home/PracticeSection'
+import CourseProgress from '../../components/Home/CourseProgress'
 
 export default function Home() {
 
@@ -30,17 +31,10 @@ export default function Home() {
     })
   }
 
-
-
-  
-
-
-
-
-
-
-
   return (
+    <FlatList 
+    data={[]}
+    ListHeaderComponent={
     <View style={{
         padding: 25,
         paddingTop: Platform.OS == 'ios' && 45,
@@ -52,12 +46,15 @@ export default function Home() {
       {courseList?.length == 0 ?
         <NoCourse /> : 
         <View>
+          <CourseProgress courseList={ courseList } />
           <PracticeSection />
           <CourseList courseList={ courseList } /> 
+          
           
         
         </View>
       }
     </View>
+    } />
   )
 }
