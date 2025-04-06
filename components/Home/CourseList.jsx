@@ -1,18 +1,24 @@
-import { View, Text, FlatList, Image, StyleSheet,  } from 'react-native'
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity,  } from 'react-native'
 import React from 'react'
 import { imageAssets } from '../../constant/Option';
 import Colors from '../../constant/Colors';
 import Octicons from '@expo/vector-icons/Octicons';
+import { useRoute } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 
 
 export default function CourseList({ courseList }) {
+
+
+  const route = useRouter();
   return (
     <View style = {{
         marginTop : 15
     }}>
       <Text style={{
         fontFamily: 'outfit-bold',
-        fontSize : 25
+        fontSize : 25,
+        color: '#585858',
       }}>Courses</Text>
 
       <FlatList
@@ -20,7 +26,14 @@ export default function CourseList({ courseList }) {
         horizontal={true}
         showsHorizontalScrollIndicator ={false}
         renderItem={({ item, index }) => ( 
-            <View key={index} style = {styles.CourseContainer} >
+            <TouchableOpacity
+             onPress={ () =>  route.push({
+              pathname:'/courseView',
+              params: {
+                courseParams:JSON.stringify(item) 
+              }
+             })}  
+            key={index} style = {styles.CourseContainer} >
                 <Image source = {imageAssets[item.banner_image]} 
                 style= {{
                     width : '100%',
@@ -48,7 +61,7 @@ export default function CourseList({ courseList }) {
                  {item?.chapters?.length}  Chapters</Text>
                
                 </View>
-            </View>
+            </TouchableOpacity>
 
     
          

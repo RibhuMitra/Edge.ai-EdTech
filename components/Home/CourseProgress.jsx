@@ -12,7 +12,8 @@ export default function CourseProgress( { courseList }) {
     }}>
       <Text style = {{
         fontSize: 20,
-        fontFamily: 'outfit-bold'
+        fontFamily: 'outfit-bold',
+        color: '#585858',
       }}>Progress</Text>
 
       <FlatList
@@ -66,11 +67,11 @@ export default function CourseProgress( { courseList }) {
                 style={{
                     marginTop: 10,
                 }}>
-                    <Progress.Bar progress={0.3} width={'265'} color='#5B5B5B'/>
+                    <Progress.Bar progress={0.3} width={265} color='#5B5B5B'/>
                     <Text style = {{
                         fontFamily: 'outfit',
                         marginTop: 5,
-                        fontSize : 12
+                        fontSize : 13
 
 
                     }}>3 Out of 5 Chapter Completed</Text>

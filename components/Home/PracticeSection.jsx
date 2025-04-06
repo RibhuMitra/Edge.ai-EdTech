@@ -30,6 +30,7 @@ export default function PracticeSection() {
       <Text style={{
         fontFamily: 'outfit-bold',
         fontSize: 20,
+        color: '#585858',
       }}>Practice</Text>
       
       <View>
